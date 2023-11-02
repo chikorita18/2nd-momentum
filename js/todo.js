@@ -2,10 +2,12 @@ const toDoForm = document.getElementById("todo-form");
 const toDoInput = document.querySelector("#todo-form input");
 const toDoList = document.getElementById("todo-list");
 
+const TODOS_KEY = "todos";
+
 const toDos = [];
 
 function saveToDos() {
-  localStorage.setItem("todos", JSON.stringify(toDos)); //어떤것이든 string으로 변경시켜줌 멋지다!
+  localStorage.setItem(TODOS_KEY, JSON.stringify(toDos)); //어떤것이든 string으로 변경시켜줌 멋지다!
 }
 
 function deleteTodo(event) {
@@ -36,3 +38,16 @@ function handleToDoSubmit() {
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
+
+function sayHello(item) {
+  console.log("This is ", item);
+}
+
+const savedToDos = localStorage.getItem(TODOS_KEY);
+
+console.log(savedToDos);
+
+if (savedToDos !== null) {
+  const parsedToDos = JSON.parse(savedToDos);
+  parsedToDos.forEach(sayHello);
+}
